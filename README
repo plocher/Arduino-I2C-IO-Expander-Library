@@ -1,0 +1,12 @@
+John Plocher's I2C IO Expander wrapper library
+
+Support included for
+
+*  PCA9555
+*  MCP2301
+*  PCF8574
+*  PCF8574A
+*  Arduino onboard pins
+
+
+
