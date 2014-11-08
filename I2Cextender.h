@@ -18,17 +18,18 @@ public:
     int      getSize(void);  
     unsigned read(void) ;
     void     write(unsigned data);
-    unsigned get(void)			{ return I2Cextender::read(); }
-    void 	 put(unsigned data) { I2Cextender::write(data);   }
-    void 	 put(void)          { I2Cextender::write(next);   }
-	
-	unsigned current();
-	unsigned last();
-	boolean  changed();
-	unsigned next;
+    unsigned get(void)          { return I2Cextender::read(); }
+    void     put(unsigned data) { I2Cextender::write(data);   }
+    void     put(void)          { I2Cextender::write(next);   }
+    
+    unsigned current();
+    unsigned last();
+    boolean  changed();
+    unsigned next;
     
     enum IOSize {
       B_UNKNOWN =  0,
+      B6        =  6,
       B8        =  8,
       B16       = 16,
       T_UNKNOWN =  0
@@ -38,11 +39,13 @@ public:
       MCP23016  =  2,
       PCF8574   =  3,
       PCF8574A  =  4,
-	  ARDIO_A   =  5,	// Bits D0  D1  D2  D3  D4  D5  D6  D7
-	  ARDIO_B   =  6,	//      D8  D9  D10 D11 D12 D13 A0  A1
-	  ARDIO_C   =  7,	//      A2  A3  A4  A5 - Partial byte... 
-	  ARDIO12_A =  8,	//      D0  D1  D5  D6   D2  D9 D10  D11  // ArdioShield LNET 1.2
-	  ARDIO12_B =  9,	//      D12 D13 A0  A1   A2  A3 D3   D4   // ArdioShield LNET 1.2
+	// built-in Arduino ports, 
+      ARDIO_A   =  5,   // Bits D0  D1  D2  D3  D4  D5  D6  D7
+      ARDIO_B   =  6,   //      D8  D9  D10 D11 D12 D13 --  --
+      ARDIO_C   =  7,   //      A0  A1  A2  A3  A4  A5  --  --
+	// undocumented - special obsolete board with custom pinout
+      ARDIO12_A =  8,   //      D0  D1  D5  D6   D2  D9 D10  D11  // ArdioShield LNET 1.2
+      ARDIO12_B =  9,   //      D12 D13 A0  A1   A2  A3 D3   D4   // ArdioShield LNET 1.2
     };
     enum PCA9555Registers {
       REGISTER_INPUT  =  0,
@@ -62,22 +65,22 @@ public:
     int _chip;
     int _address;
     unsigned _config;   
-	unsigned _current;
-	unsigned _last;
+    unsigned _current;
+    unsigned _last;
     
-    void		input8 (int i2caddr, int dir);
-    void		input16(int i2caddr, int dir);
-	void		inputA (int dir);
-	void		inputB (int dir);
-	void		inputC (int dir);
-	void		input12A (int dir);
-	void		input12B (int dir);
-	
-    void		write16(int i2caddr, unsigned data);
-    void		write8 (int i2caddr, unsigned data);
-	void		writeif(int port,    unsigned data, int bit);
-    unsigned	read8  (int i2caddr);
-    unsigned	read16 (int i2caddr);
+    void        input8 (int i2caddr, int dir);
+    void        input16(int i2caddr, int dir);
+    void        inputA (int dir);
+    void        inputB (int dir);
+    void        inputC (int dir);
+    void        input12A (int dir);
+    void        input12B (int dir);
+    
+    void        write16(int i2caddr, unsigned data);
+    void        write8 (int i2caddr, unsigned data);
+    void        writeif(int port,    unsigned data, int bit);
+    unsigned    read8  (int i2caddr);
+    unsigned    read16 (int i2caddr);
     
 
 
